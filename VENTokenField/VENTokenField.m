@@ -123,6 +123,11 @@ static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
     _placeholderText = placeholderText;
     self.inputTextField.placeholder = _placeholderText;
 }
+    
+- (void)setAttributedPlaceholderText:(NSAttributedString *)attributedPlaceholderText {
+    _attributedPlaceholderText = attributedPlaceholderText;
+    self.inputTextField.attributedPlaceholder = attributedPlaceholderText;
+}
 
 -(void)setInputTextFieldAccessibilityLabel:(NSString *)inputTextFieldAccessibilityLabel {
     _inputTextFieldAccessibilityLabel = inputTextFieldAccessibilityLabel;
@@ -410,7 +415,11 @@ static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
         _inputTextField.tintColor = self.colorScheme;
         _inputTextField.delegate = self;
         _inputTextField.backspaceDelegate = self;
-        _inputTextField.placeholder = self.placeholderText;
+        if (nil != self.attributedPlaceholderText) {
+            _inputTextField.attributedPlaceholder = self.attributedPlaceholderText;
+        } else {
+            _inputTextField.placeholder = self.placeholderText;
+        }
         _inputTextField.accessibilityLabel = self.inputTextFieldAccessibilityLabel ?: NSLocalizedString(@"To", nil);
         _inputTextField.inputAccessoryView = self.inputTextFieldAccessoryView;
         [_inputTextField addTarget:self action:@selector(inputTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
