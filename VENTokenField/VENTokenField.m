@@ -502,7 +502,11 @@ static const CGFloat VENTokenFieldDefaultMaxHeight          = 150.0;
 
 - (void)updateInputTextField
 {
-    self.inputTextField.placeholder = [self.tokens count] ? nil : self.placeholderText;
+    if (self.attributedPlaceholderText != nil) {
+        self.inputTextField.attributedPlaceholder = [self.tokens count] ? nil : self.attributedPlaceholderText;
+    } else if ( self.placeholderText != nil ) {
+        self.inputTextField.placeholder = [self.tokens count] ? nil : self.placeholderText;
+    }
 }
 
 - (void)focusInputTextField
