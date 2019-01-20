@@ -22,7 +22,9 @@
     self.names = [NSMutableArray array];
     self.tokenField.delegate = self;
     self.tokenField.dataSource = self;
-    self.tokenField.placeholderText = NSLocalizedString(@"Enter names here", nil);
+    NSString *placeholderText = NSLocalizedString(@"Enter names here", nil);
+//    self.tokenField.placeholderText = placeholderText
+    self.tokenField.attributedPlaceholderText = [[NSAttributedString alloc] initWithString:placeholderText attributes:@{ NSForegroundColorAttributeName: UIColor.redColor }];
     self.tokenField.toLabelText = NSLocalizedString(@"Post to:", nil);
     [self.tokenField setColorScheme:[UIColor colorWithRed:61/255.0f green:149/255.0f blue:206/255.0f alpha:1.0f]];
     self.tokenField.delimiters = @[@",", @";", @"--"];
